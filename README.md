@@ -20,7 +20,7 @@ address don't add the protocol or port, only the IP address.
 
 (3) After that index your CouchDB:
 
-```bash
+```
 textnotes --server-url 'https://example.com/my-db' index
 ```
 
@@ -31,6 +31,32 @@ variable `TEXTNOTES_URL` with the same content:
 
 ```
 export TEXTNOTES_URL=https://example.com/my-db
+```
+
+(4) Use the subcommand `new` to open your editor with an empty note. Make sure
+to have `VISUAL` or `EDITOR`.
+
+```
+textnotes new
+```
+
+Save and exit your editor. It will output:
+
+```
+Created:
+ + Hello World (id: han-914814d805194b1baf00273602a71f22)
+```
+
+You can edit with:
+
+```
+./textnotes edit --id han-914814d805194b1baf00273602a71f22
+```
+
+You can delete with:
+
+```
+./textnotes delete --id han-914814d805194b1baf00273602a71f22
 ```
 
 ## Global flags
@@ -132,7 +158,7 @@ Accepts the same parameters as `create` and `update`.
 
 ### delete - Delete note by id
 
-```bash
+```
 textnotes delete --id <id>
 ```
 
