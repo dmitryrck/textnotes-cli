@@ -59,6 +59,9 @@ You can delete with:
 ./textnotes delete --id han-914814d805194b1baf00273602a71f22
 ```
 
+See the list of commands below for wayt to use it, or the `example-skills/`
+directory to use with agents.
+
 ## Global flags
 
 `--format type`, output format, `type` can be `human` (default) or `json`
