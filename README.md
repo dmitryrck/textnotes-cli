@@ -10,22 +10,27 @@ Nouveau full-text search.
 (2) Add your credentials to `~/.netrc`, example:
 
 ```
-machine 127.0.0.1
+machine example.com
   login remoteuser
   password secret
 ```
 
-After that index your CouchDB:
+Replace `example.com` with the correct domain or IP address. In case of an Ip
+address don't add the protocol or port, only the IP address.
+
+(3) After that index your CouchDB:
 
 ```bash
-textnotes --server-url 'http://127.0.0.1:5984/my-db' index
+textnotes --server-url 'https://example.com/my-db' index
 ```
+
+Note:
 
 If you don't want to always use `--server-url` you can export the environment
 variable `TEXTNOTES_URL` with the same content:
 
 ```
-export TEXTNOTES_URL=http://127.0.0.1:5984/my-db
+export TEXTNOTES_URL=https://example.com/my-db
 ```
 
 ## Global flags
@@ -79,7 +84,8 @@ textnotes read --title "Hello world"
 Create one note with given attributes, `--title` is required:
 
 ```
-textnotes create --title "My Note" \
+textnotes create \
+  --title "My Note" \
   --content "# Hello" \
   --content-type "text/markdown" \
   --categories "single-word-category [[multi word category]]" \
@@ -90,10 +96,10 @@ textnotes create --title "My Note" \
 
 Options:
 
-* `--title`, title (quote if using multiple words or it has spaces/special chars)
-* `--content`, body (markdown by default)
-* `--content-type`, default `text/markdown` (saved as `content_type`)
-* `--categories`, space-separated list of categories use `[[multi word]]` for categories with space
+* `--title`, title (quote if using multiple words or it has special chars)
+* `--content`, body of the note
+* `--content-type`, default `text/markdown` (saved in CouchDB as `content_type`)
+* `--categories`, space-separated list of categories use `[[multi word]]` for categories with space, example: `simple-category [[multi word]]`
 * `--url`, URL to attach, for your reference only
 * `--fields-<key> <value>`, add some metadata, example: `--fields-icon "rocket-icon"`, `--fields-score 5`
 
@@ -104,11 +110,13 @@ Find a note by id and update it.
 `--id` and `--title` are required. Omitted fields are **cleared**, example:
 
 ```
-textnotes update --id <id> --title "New Title" \
+textnotes update \
+  --id <id> \
+  --title "New Title" \
   --content "replaced" --content-type "text/markdown"
 ```
 
-Accept the same parameters as `create`.
+Accepts the same parameters as `create`.
 
 ### patch - Partial update
 
@@ -120,7 +128,7 @@ Only `--id` is required. Omitted fields are kept as is:
 textnotes patch --id <id> --content "replaced"
 ```
 
-Accept the same parameters as `create` and `update`.
+Accepts the same parameters as `create` and `update`.
 
 ### delete - Delete note by id
 
